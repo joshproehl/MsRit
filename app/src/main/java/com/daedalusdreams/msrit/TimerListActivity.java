@@ -24,10 +24,7 @@ import android.support.v4.app.FragmentActivity;
 public class TimerListActivity extends FragmentActivity
         implements TimerListFragment.Callbacks {
 
-    /**
-     * Whether or not the activity is in two-pane mode, i.e. running on a tablet
-     * device.
-     */
+     // Whether or not the activity is in two-pane mode, i.e. running on a tablet device.
     private boolean mTwoPane;
 
     @Override

@@ -23,26 +23,22 @@ import java.util.ArrayList;
  */
 public class TimerListFragment extends ListFragment {
 
-    /**
-     * The serialization (saved instance state) Bundle key representing the
-     * activated item position. Only used on tablets.
-     */
+     // The serialization (saved instance state) Bundle key representing the
+     // activated item position. Only used on tablets.
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
 
     // The bundle key representing the parcelable ArrayList of timers.
     private static final String TIMERS_LIST = "timers_list";
 
-    /**
-     * The fragment's current callback object, which is notified of list item
-     * clicks.
-     */
+     // The fragment's current callback object, which is notified of list item
+     // clicks.
+     // Initializes with the dummy callbacks for when the fragment is not associated with an activity.
     private Callbacks mCallbacks = sDummyCallbacks;
 
-    /**
-     * The current activated item position. Only used on tablets.
-     */
+     // The current activated item position. Only used on tablets.
     private int mActivatedPosition = ListView.INVALID_POSITION;
 
+    // The list of timers that we'll be displaying.
     ArrayList<Timer> timers;
 
     /**

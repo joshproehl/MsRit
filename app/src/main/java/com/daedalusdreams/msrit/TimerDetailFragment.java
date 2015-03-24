@@ -17,16 +17,11 @@ import com.daedalusdreams.msrit.dummy.DummyContent;
  * on handsets.
  */
 public class TimerDetailFragment extends Fragment {
-    /**
-     * The fragment argument representing the item ID that this fragment
-     * represents.
-     */
     public static final String ARG_ITEM_ID = "item_id";
+     // The fragment argument representing the item ID that this fragment represents.
 
-    /**
-     * The dummy content this fragment is presenting.
-     */
     private DummyContent.DummyItem mItem;
+     // The content this fragment is presenting.
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
