@@ -4,11 +4,13 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 
 import com.daedalusdreams.msrit.dummy.DummyContent;
+import com.daedalusdreams.msrit.entities.Timer;
+
+import java.util.ArrayList;
 
 /**
  * A list fragment representing a list of Timers. This fragment
@@ -27,6 +29,9 @@ public class TimerListFragment extends ListFragment {
      */
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
 
+    // The bundle key representing the parcelable ArrayList of timers.
+    private static final String TIMERS_LIST = "timers_list";
+
     /**
      * The fragment's current callback object, which is notified of list item
      * clicks.
@@ -37,6 +42,8 @@ public class TimerListFragment extends ListFragment {
      * The current activated item position. Only used on tablets.
      */
     private int mActivatedPosition = ListView.INVALID_POSITION;
+
+    ArrayList<Timer> timers;
 
     /**
      * A callback interface that all activities containing this fragment must
@@ -71,12 +78,15 @@ public class TimerListFragment extends ListFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Try and get any saved timers out of the saved instance state, otherwise create an empty list
+        if(!savedInstanceState.isEmpty()) {
+            timers = savedInstanceState.getParcelableArrayList(TIMERS_LIST);
+        } else {
+            timers = new ArrayList<>();
+        }
+
         // TODO: replace with a real list adapter.
-        setListAdapter(new ArrayAdapter<DummyContent.DummyItem>(
-                getActivity(),
-                android.R.layout.simple_list_item_activated_1,
-                android.R.id.text1,
-                DummyContent.ITEMS));
+        setListAdapter(new TimerListAdapter(getActivity(), timers));
     }
 
     @Override
@@ -126,6 +136,9 @@ public class TimerListFragment extends ListFragment {
             // Serialize and persist the activated item position.
             outState.putInt(STATE_ACTIVATED_POSITION, mActivatedPosition);
         }
+
+        // Serialize and Save the list into shared preferences
+        outState.putParcelableArrayList(TIMERS_LIST, timers);
     }
 
     /**
