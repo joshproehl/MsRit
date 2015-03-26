@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 
-import com.daedalusdreams.msrit.dummy.DummyContent;
 
 /**
  * A fragment representing a single Timer detail screen.
@@ -17,10 +16,6 @@ import com.daedalusdreams.msrit.dummy.DummyContent;
  * on handsets.
  */
 public class TimerDetailFragment extends Fragment {
-    public static final String ARG_ITEM_ID = "item_id";
-     // The fragment argument representing the item ID that this fragment represents.
-
-    private DummyContent.DummyItem mItem;
      // The content this fragment is presenting.
 
     /**

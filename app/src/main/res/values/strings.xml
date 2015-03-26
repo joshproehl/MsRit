@@ -3,5 +3,6 @@
 
     <string name="app_name">Ms. Rit</string>
     <string name="title_timer_detail">Timer Detail</string>
+    <string name="lbl_timer_name">Timer Name</string>
 
 </resources>
