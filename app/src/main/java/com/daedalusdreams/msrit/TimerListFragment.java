@@ -6,8 +6,6 @@ import android.support.v4.app.ListFragment;
 import android.view.View;
 import android.widget.ListView;
 
-
-import com.daedalusdreams.msrit.dummy.DummyContent;
 import com.daedalusdreams.msrit.entities.Timer;
 
 import java.util.ArrayList;
@@ -26,9 +24,6 @@ public class TimerListFragment extends ListFragment {
      // The serialization (saved instance state) Bundle key representing the
      // activated item position. Only used on tablets.
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
-
-    // The bundle key representing the parcelable ArrayList of timers.
-    private static final String TIMERS_LIST = "timers_list";
 
      // The fragment's current callback object, which is notified of list item
      // clicks.
@@ -50,7 +45,8 @@ public class TimerListFragment extends ListFragment {
         /**
          * Callback for when an item has been selected.
          */
-        public void onItemSelected(String id);
+        public void onItemSelected(int position);
+
     }
 
     /**
@@ -59,7 +55,10 @@ public class TimerListFragment extends ListFragment {
      */
     private static Callbacks sDummyCallbacks = new Callbacks() {
         @Override
-        public void onItemSelected(String id) {
+        public void onItemSelected(int position) {
+        }
+        public ArrayList<Timer> getTimers() {
+            return new ArrayList<>();
         }
     };
 
@@ -74,15 +73,7 @@ public class TimerListFragment extends ListFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Try and get any saved timers out of the saved instance state, otherwise create an empty list
-        if(!savedInstanceState.isEmpty()) {
-            timers = savedInstanceState.getParcelableArrayList(TIMERS_LIST);
-        } else {
-            timers = new ArrayList<>();
-        }
-
-        // TODO: replace with a real list adapter.
-        setListAdapter(new TimerListAdapter(getActivity(), timers));
+        setListAdapter(new TimerListAdapter(getActivity(), ((MsRitApplication)getActivity().getApplicationContext()).getTimers()));
     }
 
     @Override
@@ -122,7 +113,7 @@ public class TimerListFragment extends ListFragment {
 
         // Notify the active callbacks interface (the activity, if the
         // fragment is attached to one) that an item has been selected.
-        mCallbacks.onItemSelected(DummyContent.ITEMS.get(position).id);
+        mCallbacks.onItemSelected(position);
     }
 
     @Override
@@ -132,9 +123,6 @@ public class TimerListFragment extends ListFragment {
             // Serialize and persist the activated item position.
             outState.putInt(STATE_ACTIVATED_POSITION, mActivatedPosition);
         }
-
-        // Serialize and Save the list into shared preferences
-        outState.putParcelableArrayList(TIMERS_LIST, timers);
     }
 
     /**

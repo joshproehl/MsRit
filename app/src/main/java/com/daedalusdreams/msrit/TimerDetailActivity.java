@@ -6,6 +6,10 @@ import android.support.v7.app.ActionBarActivity;
 
 import android.view.MenuItem;
 
+import com.daedalusdreams.msrit.entities.Timer;
+
+import java.util.ArrayList;
+
 
 /**
  * An activity representing a single Timer detail screen. This
@@ -17,6 +21,7 @@ import android.view.MenuItem;
  * more than a {@link TimerDetailFragment}.
  */
 public class TimerDetailActivity extends ActionBarActivity {
+    Timer mTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +44,8 @@ public class TimerDetailActivity extends ActionBarActivity {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
             Bundle arguments = new Bundle();
-            arguments.putString(TimerDetailFragment.ARG_ITEM_ID,
-                    getIntent().getStringExtra(TimerDetailFragment.ARG_ITEM_ID));
+            arguments.putInt(TimerDetailFragment.ITEM_POS_KEY,
+                    getIntent().getIntExtra(TimerDetailFragment.ITEM_POS_KEY, -1));
             TimerDetailFragment fragment = new TimerDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
@@ -64,4 +69,5 @@ public class TimerDetailActivity extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

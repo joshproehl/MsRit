@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 
+import com.daedalusdreams.msrit.entities.Timer;
+
+import java.util.ArrayList;
 
 /**
  * A fragment representing a single Timer detail screen.
@@ -16,7 +19,14 @@ import android.widget.TextView;
  * on handsets.
  */
 public class TimerDetailFragment extends Fragment {
-     // The content this fragment is presenting.
+    // The position in the list for the item we're interested in
+    public static final String ITEM_POS_KEY = "MsRit.selectedItem.intPos";
+
+
+    private ArrayList<Timer> _timersList;   // The list of timers from the app context
+    private int _selectedTimer;             // The position in the list of the one this fragment is working with. (From the intent)
+    private Timer _timer;                   // The specific timer out of the list that we're working with.
+
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -29,11 +39,12 @@ public class TimerDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getArguments().containsKey(ARG_ITEM_ID)) {
-            // Load the dummy content specified by the fragment
-            // arguments. In a real-world scenario, use a Loader
-            // to load content from a content provider.
-            mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
+        // Get the list of timers from the application so we can view/edit
+        _timersList = ((MsRitApplication)getActivity().getApplicationContext()).getTimers();
+
+        if (getArguments().containsKey(ITEM_POS_KEY)) {
+            _selectedTimer = savedInstanceState.getInt(ITEM_POS_KEY);
+            _timer = _timersList.get(_selectedTimer);
         }
     }
 
@@ -42,9 +53,8 @@ public class TimerDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_timer_detail, container, false);
 
-        // Show the dummy content as text in a TextView.
-        if (mItem != null) {
-            ((TextView) rootView.findViewById(R.id.timer_detail)).setText(mItem.content);
+        if (_timer != null) {
+            ((TextView) rootView.findViewById(R.id.detail_timer_name)).setText(_timer.getName());
         }
 
         return rootView;
