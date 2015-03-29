@@ -1,24 +1,9 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:id="@+id/timer_detail_container"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:context=".TimerDetailActivity"
-                tools:ignore="MergeRootFrame">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:id="@+id/timer_detail_container"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context=".TimerDetailActivity"
+             tools:ignore="MergeRootFrame">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/lbl_timer_name"
-        android:id="@+id/lblTimerName"
-        android:layout_gravity="left|top" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="..."
-        android:id="@+id/detail_timer_name"
-        android:layout_gravity="right|top" />
-</RelativeLayout>
+</FrameLayout>

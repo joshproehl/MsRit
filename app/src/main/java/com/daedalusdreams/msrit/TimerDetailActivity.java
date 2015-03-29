@@ -4,12 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
-
-import com.daedalusdreams.msrit.entities.Timer;
-
-import java.util.ArrayList;
-
 
 /**
  * An activity representing a single Timer detail screen. This
@@ -21,7 +18,8 @@ import java.util.ArrayList;
  * more than a {@link TimerDetailFragment}.
  */
 public class TimerDetailActivity extends ActionBarActivity {
-    Timer mTimer;
+
+    //region Instance management
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +52,9 @@ public class TimerDetailActivity extends ActionBarActivity {
         }
     }
 
+    //endregion
+    //region Required implementations
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -67,7 +68,21 @@ public class TimerDetailActivity extends ActionBarActivity {
             navigateUpTo(new Intent(this, TimerListActivity.class));
             return true;
         }
+        else if(id == R.id.action_add_timer) {
+            // TODO: Get activity and call saveTimerState();
+        }
+
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.timer_activity_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    //endregion
 
 }

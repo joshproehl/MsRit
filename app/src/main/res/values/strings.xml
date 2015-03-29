@@ -5,5 +5,7 @@
     <string name="title_timer_detail">Timer Detail</string>
     <string name="lbl_timer_name">Timer Name</string>
     <string name="action_add_timer">Add Timer</string>
+    <string name="action_save_timer">Save Timer</string>
+    <string name="action_delete_timer">Delete Timer</string>
 
 </resources>

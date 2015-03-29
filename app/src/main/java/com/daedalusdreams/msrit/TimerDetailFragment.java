@@ -64,4 +64,15 @@ public class TimerDetailFragment extends Fragment {
 
         return rootView;
     }
+
+    //region Internal helpers
+
+    /**
+     * Saves the current timer into the list, then triggers the list to save.
+     */
+    private void saveTimerState() {
+
+    }
+
+    //endregion
 }
