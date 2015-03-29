@@ -40,11 +40,16 @@ public class TimerDetailFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         // Get the list of timers from the application so we can view/edit
-        _timersList = ((MsRitApplication)getActivity().getApplicationContext()).getTimers();
+        _timersList = ((MsRitApplication) getActivity().getApplicationContext()).getTimers();
 
-        if (getArguments().containsKey(ITEM_POS_KEY)) {
-            _selectedTimer = savedInstanceState.getInt(ITEM_POS_KEY);
-            _timer = _timersList.get(_selectedTimer);
+        if (savedInstanceState != null) {
+            // There's a saved state to restore
+            if (getArguments().containsKey(ITEM_POS_KEY)) {
+                _selectedTimer = savedInstanceState.getInt(ITEM_POS_KEY);
+                _timer = _timersList.get(_selectedTimer);
+            }
+        } else {
+           // No saved state.
         }
     }
 

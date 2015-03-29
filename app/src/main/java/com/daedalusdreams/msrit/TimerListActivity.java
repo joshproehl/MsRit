@@ -3,6 +3,10 @@ package com.daedalusdreams.msrit;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.daedalusdreams.msrit.entities.Timer;
 
@@ -25,7 +29,7 @@ import java.util.ArrayList;
  * {@link TimerListFragment.Callbacks} interface
  * to listen for item selections.
  */
-public class TimerListActivity extends FragmentActivity
+public class TimerListActivity extends ActionBarActivity
         implements TimerListFragment.Callbacks {
 
      // Whether or not the activity is in two-pane mode, i.e. running on a tablet device.
@@ -101,6 +105,44 @@ public class TimerListActivity extends FragmentActivity
             // for the selected item ID.
             Intent detailIntent = new Intent(this, TimerDetailActivity.class);
             detailIntent.putExtra(TimerDetailFragment.ITEM_POS_KEY, position);
+            startActivity(detailIntent);
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.timer_list_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.action_add_timer:
+                openAddFragment();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    //endregion
+    //region Internal helpers
+
+    /**
+     * Opens the edit fragment with no content. (Either in the pane on tablet, or in it's activity otherwise)
+     */
+    private void openAddFragment() {
+        if (mTwoPane) {
+            TimerDetailFragment fragment = new TimerDetailFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.timer_detail_container, fragment)
+                    .commit();
+        } else {
+            Intent detailIntent = new Intent(this, TimerDetailActivity.class);
             startActivity(detailIntent);
         }
     }
